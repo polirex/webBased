@@ -1,0 +1,44 @@
+body {
+    background-color: black;
+}
+
+ul.topMenu{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border-style: solid;
+  overflow: hidden;
+  background-color: #eeeeee;
+}
+
+
+ul.topMenu li {
+  float: left;
+}
+
+ul.topMenu li a {
+    display: inline-block;
+    color: #992222;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    border-right:solid;
+    border-right-width: thin;
+    border-right-color: #00BFFF;
+}
+
+
+
+form.log{
+  background-color:white;
+  border-style:solid;
+  width: 450px;
+}
+
+
+form.reg{
+  background-color:white;
+  border-style:solid; 
+  width: 550px;
+}
