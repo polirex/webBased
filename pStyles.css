@@ -1,5 +1,5 @@
 body {
-    background-color: black;
+    background-color: white;
 }
 
 ul.topMenu{
@@ -11,9 +11,9 @@ ul.topMenu{
   background-color: #eeeeee;
 }
 
-
 ul.topMenu li {
   float: left;
+  background-color: white;
 }
 
 ul.topMenu li a {
