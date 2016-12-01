@@ -6,7 +6,7 @@ $_SESSION['username'] = $_POST['username'];
 $_SESSION['password'] = $_POST['password'];
 
 
-$conn = mysqli_connect("localhost", "root", "");
+$conn = mysqli_connect("earth.cs.utep.edu", "cs5339team8fa16", "cs5339!cs5339team8fa16", "wb_longpre");
 if(!$conn) {
   die("Connection failed: ". mysqli_connect_error());
 }
