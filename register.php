@@ -6,7 +6,7 @@
 
 <html>
 
-<head><title>Main page</title>
+<head><title>Register</title>
   <link rel="stylesheet" type="text/css" href="pStyles.css">
 
 </head>
@@ -31,7 +31,7 @@
           <select name = "degree">
             <option value = "BSCS">BSCS</option>
             <option value = "MS">MS</option>
-            <option value = "MIT">MIT</option>
+            <option value = "MSIT">MSIT</option>
             <option value = "PHD">PHD</option>
             <option value = "MSIT">MIST</option>
           </select>
@@ -115,23 +115,27 @@
         //  $id = "SELECT id FROM csdegrees WHERE AcademicYear = '$AcademicYr' AND LastName = '$LastName' AND FirstName = '$FirstName' AND
         //  Major = '$major' AND LevelCode = '$LevelCode' AND Degree = '$degree'";
 
-        $duplicate = "SELECT * FROM USERS WHERE $result, '$username'";
-        $dup = mysqli_query($conn, $duplicate);
-        if(!$dup) die("duplicate");
+        $duplicate = "SELECT * FROM USERS WHERE id = $result, username = '$username'";
+      //  $dup = mysqli_query($conn, $duplicate);
+        $dup = $conn -> query($duplicate);
+        //if(!$dup) die("duplicate");
 
-        elseif($dup -> num_rows == 0) {
+
+        if(!$dup) {
           $insert = "INSERT INTO USERS VALUE ($result, '$username', '$token')";
           $res2 = mysqli_query($conn, $insert);
       }
+      else {
+        echo "duplicate";
+      }
         print_r($res2);
-
         //if(mysqli_query($conn, $insert))
         //echo "user created successfully";
 
         //    }
-        if(!$result || !$res2) {
+        //if(!$result || !$res2) {
           //echo "user not found or not created";
-        }
+      //  }
         //echo "error with user: " . mysqli_error($conn)."<br>";
         //  exit();
         //

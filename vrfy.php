@@ -6,7 +6,7 @@ $_SESSION['username'] = $_POST['username'];
 $_SESSION['password'] = $_POST['password'];
 
 
-$conn = mysqli_connect("earth.cs.utep.edu", "cs5339team8fa16", "cs5339!cs5339team8fa16", "wb_longpre");
+$conn = mysqli_connect("earth.cs.utep.edu", "cs5339team8fa16", "cs5339!cs5339team8fa16", "cs5339team8fa16");
 if(!$conn) {
   die("Connection failed: ". mysqli_connect_error());
 }
@@ -17,29 +17,31 @@ $salt="qm&h";
 
 $token=hash('ripemd160', $salt.$username.$password);
 
-if(isset($username) && isset($password)) {
-  $result = mysqli_query($conn, "SELECT username, password FROM USERS WHERE username= '$username' AND password= '$token'");
+//if(isset($username) && isset($password)) {
+$query = "SELECT username, password FROM USERS WHERE username= '$username' AND password= '$token'";
+  $result = mysqli_query($conn, $query);
 
   // if($result === FALSE) {
   //   echo "aheongae";
   //   die(mysql_error());
   // }
-  while($row=mysqli_fetch_array($result)) {
+  if($result -> num_rows > 0) {
     echo ";j;oiaher";
-    header('Location: '.'index.php');
+    $logged = $_SESSION['logged'] = true;
+    header('Location: '.'profile.php');
   }
 
-  if($username=="admin" && $password=="nimda339") {
-    header('Location: ' . 'register.php');
-  }
-  else {
-    exit('<h2> Cannot access </h2>');
-  }
+  //if($username=="admin" && $password=="nimda339") {
+  //header('Location: ' . 'register.php');
+  //}
+  //else {
+    //exit('<h2> Cannot access </h2>');
+//  }
 
-}
-else {
-  echo "fail";
-}
+//}
+//else {
+  //echo "fail";
+//}
 
 
 ?>

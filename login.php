@@ -32,22 +32,12 @@ session_start();
   <form class="log" action="vrfy.php" method="POST">
     <div >
       <label><b>Username</b></label>
-    <!-- <form action="vrfy.php" method="POST"> -->
     <input type="text" placeholder="Enter Username" name="username" required></input>
     <br/>
     <label><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" required></input>
     <br/>
     <input type="submit"></input>
-    <!-- </form> -->
-
-    <!-- $_SESSION['username'] = $_POST['username'];
-    $_SESSION['password'] = $_POST['password']; -->
-      <!-- <script>
-      function verify() {
-        window.location.href="../proj4/verify.php";
-      }
-      </script> -->
     </div>
   </form>
 </div>
