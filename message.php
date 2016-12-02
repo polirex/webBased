@@ -75,6 +75,7 @@
       }
     }
     echo "<a href = 'logout.php'>Click here</a> to log out";
+    echo "<a href = 'profile.php'>Click here</a> to go back to profile</br>";
   }
 
   else {

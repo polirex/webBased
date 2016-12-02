@@ -14,11 +14,10 @@
 session_start();
 session_regenerate_id(true);
 
-$username = $_SESSION['username'];
-$logged = $_SESSION['logged'];
 
-if($logged==1) {
-  echo "hello";
+if($_SESSION['logged']) {
+  $username = $_SESSION['username'];
+  echo "<h1>Welcome " . $username . "</h1></br>";
 
 
   $conn = mysqli_connect("earth.cs.utep.edu", "cs5339team8fa16", "cs5339!cs5339team8fa16", "cs5339team8fa16");
@@ -41,27 +40,67 @@ if($logged==1) {
 
     while($row = $result2->fetch_assoc()){
 
-      echo $row['AcademicYear'] . "</br>";
-      echo $row['Term']. "</br>";
-      echo $row['FirstName']. "</br>";
-      echo $row['LastName']. "</br>";
-      echo $row['Major']. "</br>";
-      echo $row['LevelCode']. "</br>";
-      echo $row['Degree']. "</br>";
+      echo "Name: " . $row['FirstName'] . " " . $row['LastName'] . "</br>";
+      echo "Your academic year: " . $row['AcademicYear'] . "</br>";
+      echo "Your Term: " . $row['Term']. "</br>";
+      echo "Major: " . $row['Major']. "</br>";
+      echo "Level Code: " . $row['LevelCode']. "</br>";
+      echo "Degree: " . $row['Degree']. "</br>";
     }
   }
 
-  $messages = "SELECT message FROM BOARD WHERE username = '$username'";
+  $messages = "SELECT message, msgnum FROM BOARD WHERE username = '$username'";
   $retrieve = $conn -> query($messages);
+  echo "<h3> Your posted messages are: </h3>";
+  //echo ""
   if($retrieve) {
     while($row2 = $retrieve -> fetch_assoc()){
-      echo $username . " posted: " . $row2['message'] . "</br>";
+      echo "<form action = 'profile.php' method = 'POST'>";
+      $msgnum = $row2['msgnum'];
+      echo $username . " posted: " . $row2['message'] . " " . "<input type = 'checkbox' name = 'delete'
+      value = $msgnum/></br>";
     }
+    echo "<input type = 'submit' name = 'submit' value = 'Delete'></input>";
+    echo "</form>";
+
+
+
+
+    if(isset($_POST['submit'])) {
+      // echo "test";
+      // echo $_POST['delete'];
+      // echo "test2";
+      if(!empty($_POST['delete'])) {
+        $delete = $_POST['delete'];
+        //foreach($_POST['delete'] as $value) {
+          //print_r($delete);
+          $deletequery = "DELETE FROM BOARD WHERE msgnum = '$delete'";
+          $del = $conn -> query($deletequery);
+          if($del) {
+            echo "</br>success</br>";
+          }
+          else {
+            echo $del = $conn -> error;
+          }
+        //}
+      }
+      header('Location' . 'profile.php');
+    }
+
+
+
+
   }
+
+
+
+
+
 
   $conn -> close();
 
   echo "</br><a href = 'logout.php'>Logout</a>";
+  echo "</br><a href = 'index.php'> Home </a>";
   echo "</br><a href = 'message.php'>Click here</a> to go to message board";
 }
 
