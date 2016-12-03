@@ -2,7 +2,7 @@
     <!-- Here we display the content of the mainpage of the webpage -->
     <head><title>Main page</title>
         <link rel="stylesheet" type="text/css" href="pStyles.css">
-
+        
         <!-- 
         This JavaScript file was retrieved from this website: http://www.kryogenix.org/code/browser/sorttable/
         This Java Script is in charge of ordering the list on ascending and descending order.
@@ -88,7 +88,6 @@
                 <td><strong>Major</strong></td>
                 <td><strong>Level Code</strong></td>
                 <td><strong>Degree</strong></td>
-                <td><strong>Profile</strong></td>
             </tr>
 
             <?php
@@ -132,21 +131,6 @@
                 enterQuery($databaseConnection, $query);
             }
 
-            //Check the profile ID with the profile ID from the profile table
-            function checkProfile($conn, $profileID)
-            {
-                $query = "SELECT * FROM `PROFILE` WHERE `id`='$profileID'";
-                $result = $conn->returnQuery($query);
-                //If the ID was found, then the user has a profile
-                if ($result->num_rows > 0)
-                {
-                    return true;
-                } else
-                {
-                    return false;
-                }
-            }
-
             function enterQuery($conn, $query)
             {
                 $result = $conn->returnQuery($query);
@@ -155,16 +139,6 @@
                 {
                     while ($row = $result->fetch_assoc())
                     {
-                        $hasProfile;
-                        if (!checkProfile($conn, $row['id']))
-                        {
-                            //execute query to get profile, if num_rows == 0
-                            //then set the profileBool to null or false.
-                            $hasProfile = false;
-                        } else
-                        {
-                            $hasProfile = true;
-                        }
                         ?>
                         <tr>
                             <td><?php echo $row['AcademicYear']; ?></td>
@@ -174,15 +148,6 @@
                             <td><?php echo $row['Major']; ?></td>
                             <td><?php echo $row['LevelCode']; ?></td>
                             <td><?php echo $row['Degree']; ?></td>
-
-                            <?php
-                            if ($hasProfile)
-                            {
-                                $profile = $row['id'];
-                                echo "<td><a href='profile.php?id=$profile'>Profile</a></td>";
-                            } else
-                                echo "<td>N/A</td>";
-                            ?>
                         </tr>
                         <?php
                     }
