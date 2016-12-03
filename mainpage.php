@@ -67,9 +67,6 @@
             <input type="submit" value='Filter'>
         </form>
 
-        <br/><br/>
-
-
         <label><b>Degree</b></label>
         <form action="mainpage.php" method="GET">
             <select name = "Degree">
@@ -81,9 +78,6 @@
             </select>
             <input type="submit" value='Filter'>
         </form>
-
-
-        <br/><br/>
 
         <table width="70%" cellpadding="5" cellspace="5" class="sortable">
             <tr>
