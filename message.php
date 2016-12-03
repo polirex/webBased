@@ -1,8 +1,22 @@
 <div style="text-align:center;">
+  <title>Message Board</title>
   <h1>Message Board</h1>
 </div>
+
+<body>
+  <header>
+  <ul class="topMenu">
+    <li > <a  href="mainpage.php">Main page</a></li>
+    <li > <a  href="login.php">login</a></li>
+    <li > <a  href="register.php">Registration</a></li>
+    <!-- <li > <a  href="message.php">Message Board</a></li> -->
+  </ul>
+</header>
+</body>
+
 <form action="message.php" method="POST">
   <div style="position: absolute; bottom: 5px;text-align:center;">
+    <link rel="stylesheet" type="text/css" href="pStyles.css">
 
     <!--<label>Name :</label>
     <input id="name" name="name"  type="text">
@@ -59,7 +73,7 @@
     echo "</td>";
     if(isset($_POST['submit'])){//if a message has been submitted
       //$name="user"; // I had just hardcoded for testing but need to obtain user from table
-      $ms=$_POST['message'];
+      $ms=fix_string1($connection, $_POST['message']);
       $query="INSERT INTO BOARD (username, message) VALUES ('$username','$ms')";
       $result2 = $connection -> query($query);
 
@@ -76,6 +90,20 @@
     }
     echo "<a href = 'logout.php'>Click here</a> to log out";
     echo "<a href = 'profile.php'>Click here</a> to go back to profile</br>";
+
+
+    function fix_string1($conn, $string) {
+      return htmlentities(fix_string2($conn, $string));
+    }
+    function fix_string2($conn, $string) {
+      if(get_magic_quotes_gpc())
+      $string=stripcslashes($string);
+      return $conn->real_escape_string($string);
+    }
+
+
+
+
   }
 
   else {

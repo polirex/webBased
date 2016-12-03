@@ -20,6 +20,7 @@ session_start()
 			<li > <a  href="mainpage.php">Main page</a></li>
 			<li > <a  href="login.php">login</a></li>
 			<li > <a  href="register.php">Registration</a></li>
+			<li > <a  href="message.php">Message Board</a></li>
 		</ul>
 </header>
 	</body>

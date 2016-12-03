@@ -9,6 +9,17 @@
 <head><title>Register</title>
   <link rel="stylesheet" type="text/css" href="pStyles.css">
 
+  <body>
+		<header>
+		<ul class="topMenu">
+			<li > <a  href="mainpage.php">Main page</a></li>
+			<li > <a  href="login.php">Login</a></li>
+			<!-- <li > <a  href="register.php">Registration</a></li> -->
+			<li > <a  href="message.php">Message Board</a></li>
+		</ul>
+</header>
+	</body>
+
 </head>
 <body>
   <form class="reg" action="register.php" method="POST">
@@ -89,8 +100,8 @@
           die("Connection failed: ". mysqli_connect_error());
         }
 
-        $FirstName = $_POST['fname'];
-        $LastName = $_POST['lname'];
+        $FirstName = fix_string1($conn, $_POST['fname']);
+        $LastName = fix_string1($conn, $_POST['lname']);
         $AcademicYr = $_POST['academicyr'];
         $major = $_POST['major'];
         $LevelCode = $_POST['lvlcode'];
