@@ -1,3 +1,4 @@
+
 body {
     background-color: white;
 }
@@ -41,4 +42,12 @@ form.reg{
   background-color:white;
   border-style:solid; 
   width: 550px;
+}
+
+/* Sortable tables */
+table.sortable thead {
+    background-color:#eee;
+    color:#666666;
+    font-weight: bold;
+    cursor: default;
 }
