@@ -1,11 +1,12 @@
 <?php
+
 class database
 {
+
     private static $host = "earth.cs.utep.edu";
     private static $user = "cs5339team8fa16";
     private static $pass = "cs5339!cs5339team8fa16";
     private static $db_name = "wb_longpre";
-
     public $con;
 
     public function __construct()
@@ -16,7 +17,6 @@ class database
     private function connect()
     {
         $this->con = new mysqli(self::$host, self::$user, self::$pass, self::$db_name);
-
         //if there was a problem with the connection to the db.
         if ($this->con->connect_errno)
         {
@@ -30,7 +30,6 @@ class database
     {
         $this->con->query($query) or die($this->con->error . "error");
         $affected_rows = mysqli_affected_rows($this->con);
-
         if ($affected_rows > 0)
             return true;
         else
@@ -43,5 +42,23 @@ class database
         return $result;
     }
 
+    public function mysql_entities_fix_string($string)
+    {
+        return htmlentities($this->mysql_fix_string($string));
+    }
+
+    public function mysql_fix_string($string)
+    {
+        if (get_magic_quotes_gpc())
+        {
+            $string = stripslashes($string);
+        }
+        return $this->con->real_escape_string($string);
+    }
+
+    public function closeConnection()
+    {
+        return $this->con->close();
+    }
 
 }
