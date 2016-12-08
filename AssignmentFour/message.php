@@ -24,13 +24,13 @@
   <br>
   <br>
   <label>Message :</label>
-  <input style="height:70px;font-size:12pt;width:800px;word-wrap: break-word;;" id="message" name="message"  type="text"><!--Should make the txt box for msg bigger -->
+  <input style="height:45px;font-size:12pt;width:800px;word-wrap: break-word;;" id="message" name="message"  type="text"><!--Should make the txt box for msg bigger -->
   <br>
   <br>
   <input name="submit" type="submit" value="submit">
 </div>
 <td style="height:50px;width:50px"align='right'>
-  <div style="height:45%;width:50%; overflow-y:scroll;text-align:left;"</br></br> <!--Should make the messages scrollable -->
+  <div style="height:40%;width:50%; overflow-y:scroll;text-align:left;"</br></br> <!--Should make the messages scrollable -->
   </form>
   <?php
   require_once 'vrfy.php';
@@ -44,10 +44,12 @@
     $host='earth.cs.utep.edu';
     $user='cs5339team8fa16';
     $password='cs5339!cs5339team8fa16';
+    //leep(3);
     $connection = mysqli_connect($host, $user, $password, "cs5339team8fa16");
     if(!$connection){
       die('Could not connect: '. mysql_error());
     }
+    
     //mysql_select_db($database, $connection);
     $username = $_SESSION['username'];
     $ms;
@@ -74,7 +76,8 @@
       $result2 = $connection -> query($query);
       if(!$result2){
         echo "</br></br>message submitted</br>";
-        //or maybe start session and go to user
+        mysqli_close($connection);
+       
         header('Location' . 'message.php');//header('Location' . 'message.php');
       }
       elseif(!$result2){
@@ -85,7 +88,7 @@
 
 
     }
-   // echo "</br></br></br><a href = 'logout.php'>Click here</a> to log out";//</br>";
+   echo "<a href = 'message.php'>Refresh Messages</a>";//</br>";
    // echo "<a href = 'profile.php'>Click here</a> to go back to profile</br>";//</br></br>
 
   }
